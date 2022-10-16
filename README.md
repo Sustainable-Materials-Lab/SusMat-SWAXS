@@ -12,6 +12,7 @@ Requires python3 and numpy. Works "out of the box" with anaconda python 3 distri
 ## Usage
 
 ### dat_conv
+
 #### Input
 .dat file consisting of tab separated columns for q, I(q) (and sigma q).
 
@@ -24,12 +25,12 @@ To automate for an entire folder in windows, you could use PowerShell:
 Get-ChildItem -Filter *.dat | ForEach-Object -Process {python.exe dat_conv.py $_.BaseName}
 ```
 
-####Output
+#### Output
 .xy(e) file consisting of tab separated columns for 2theta, I and error if present in the input.
 
 ### sph_harm
 
-####Input
+#### Input
 Coefficients of spherical harmonics function from the TOPAS academic output file (.out)
 
 `python sph_harm.py <c00> <c20>...`
@@ -40,7 +41,7 @@ python sph_harm.py 1 -.54889 0.48504 0.74711 0.79916 -0.33178 0.16323 0.45369 -.
  .01524 .09042 .85340 .40316 -.01881 1.47673 -.55751 -.68970 .02621 -.06565 -.56472 1.00981 -.12339 -.25831
 ```
 
-####Output
+#### Output
 Image containing a graphical representation of the function.
 
 ## Support
