@@ -22,9 +22,14 @@ parser = ap.ArgumentParser(description=
                            "Perform data reduction on hdf5 data from DESY")
 
 parser.add_argument("sample", help="sample file (.nxs)")
-#parser.add_argument("background", help="background file (.nxs)")
+
 parser.add_argument("mask", help="mask file (.edf)")
 parser.add_argument("poni", help="PONI configuration file (.poni)")
+parser.add_argument("--empty", help="empty file (.nxs)")
+parser.add_argument("--background", help="background file (.nxs)")
+
+parser.add_argument("--bkg_factor", help="background correction factor",type=float,default=float(1))
+parser.add_argument("--noscaling", help="background file (.nxs)",action="store_true")
 
 args = parser.parse_args()
 
@@ -35,26 +40,59 @@ args = parser.parse_args()
 mask = fabio.open(args.mask)
 poni = pyFAI.load(args.poni)#"config_saxs_sdetx_1500_12keV.poni")
 file = h5py.File(args.sample,'r')
-#bkg = h5py.File(args.background,'r')
 
-
-#transmission_bkg = bkg['scan']['data']['beamstop_2'][()]/bkg['scan']['data']['ic1'][()]
-#print("Background transmission:"+str(transmission_bkg))
-
-transmission_sample = file['scan']['data']['beamstop_2'][()]/file['scan']['data']['ic1'][()]
-print("Sample transmission:"+str(transmission_sample))
+if args.noscaling == True:
+    transmission_sample = 1
+else:
+    transmission_sample = file['scan']['data']['beamstop_2'][()]/file['scan']['data']['ic1'][()]
+print("Sample transmission:"+str(round(transmission_sample,4)))
 
 temperature = str(round(file['scan']['data']['p62']['t95tempproglinkam']['eh.01']['temperature'][()],2))
+print("Sample temperature:"+temperature)
 
-#data_cor = file['scan']['data']['saxs_raw'][()][0]/transmission_sample - bkg['scan']['data']['saxs_raw'][()][0]/transmission_bkg
-
-data_cor = file['scan']['data']['saxs_raw'][()][0]
+if args.background != None:
+    bkg = h5py.File(args.background,'r')
+    if args.noscaling == True:
+        transmission_bkg = 1
+    else:
+        transmission_bkg = bkg['scan']['data']['beamstop_2'][()]/bkg['scan']['data']['ic1'][()]
+    try:
+        temperature_bkg = str(round(bkg['scan']['data']['p62']['t95tempproglinkam']['eh.01']['temperature'][()],2))
+    except KeyError:
+        temperature_bkg = str(-1000)
+    print("Background transmission:"+str(round(transmission_bkg,4)))
+    print("Background temperature:"+temperature_bkg)
+    if args.empty != None:
+        empty = h5py.File(args.empty,'r')
+        if args.noscaling == True:
+            transmission_empty = 1
+        else:
+            transmission_empty = empty['scan']['data']['beamstop_2'][()]/empty['scan']['data']['ic1'][()]
+        data_cor = ((file['scan']['data']['saxs_raw'][()][0]/transmission_sample)-
+                    (empty['scan']['data']['saxs_raw'][()][0]/transmission_empty)
+                    ) - ((args.bkg_factor*bkg['scan']['data']['saxs_raw'][()][0]/transmission_bkg) -
+                         (empty['scan']['data']['saxs_raw'][()][0]/transmission_empty))
+    else:
+                         data_cor = (file['scan']['data']['saxs_raw'][()][0]/
+                                     transmission_sample) - (bkg['scan']['data']['saxs_raw'][()][0]/
+                                                             transmission_bkg)
+else:
+    if args.empty != None:
+        empty = h5py.File(args.empty,'r')
+        if args.noscaling == True:
+            transmission_empty = 1
+        else:
+            transmission_empty = empty['scan']['data']['beamstop_2'][()]/empty['scan']['data']['ic1'][()]
+        data_cor = (file['scan']['data']['saxs_raw'][()][0]/
+                    transmission_sample)-(empty['scan']['data']['saxs_raw'][()][0]/transmission_empty)
+    else:
+        data_cor = file['scan']['data']['saxs_raw'][()][0]/transmission_sample
 #data_cor = bkg['scan']['data']['saxs_raw'][()][0]
 
 data_1D = poni.integrate1d(data_cor, 1000, filename=args.sample+"_"+temperature+'_1D.dat', correctSolidAngle=True,
                                   method='csr', radial_range=(None), azimuth_range=(None),
                                   unit="q_A^-1", mask=mask.data, normalization_factor=1.0,
-                                  metadata=None) 
+                                  metadata=None,error_model="poisson") 
 
 fig, ax = plt.subplots(1,2,figsize=(25,10),constrained_layout=True)
 fig1 = ax[0].imshow(data_cor,norm=LogNorm(vmin=1e-1, vmax=10**3),cmap=plt.get_cmap('plasma'))
@@ -80,4 +118,5 @@ ax[1].set_ylabel('intensity [a.u.]',fontsize=25)
 # ax[1].set_xticks([0.01,0.1,0.4,0.6])
 ax[1].get_xaxis().set_major_formatter(ticker.ScalarFormatter())
 ax[1].tick_params(labelsize=25)
+#plt.show()
 plt.savefig(args.sample+"_"+temperature+".png", bbox_inches="tight", dpi=600)
