@@ -16,29 +16,42 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import matplotlib.ticker as ticker
+import argparse as ap
 
-path = "/home/u0092172/Documents/"
-folder = "DESY/"
-sample = "GA5/GA5_2.nxs"
-background = "water/water_2.nxs"
-mask = fabio.open(path+folder+"mask1.edf")
-poni = pyFAI.load(path+folder+"config_saxs_sdetx_1500_12keV.poni")
-file = h5py.File(path + folder + sample,'r')
-bkg = h5py.File(path + folder + background,'r')
+parser = ap.ArgumentParser(description=
+                           "Perform data reduction on hdf5 data from DESY")
+
+parser.add_argument("sample", help="sample file (.nxs)")
+#parser.add_argument("background", help="background file (.nxs)")
+parser.add_argument("mask", help="mask file (.edf)")
+parser.add_argument("poni", help="PONI configuration file (.poni)")
+
+args = parser.parse_args()
+
+#path = "/home/u0092172/Documents/"
+#folder = "DESY/"
+#sample = "GA5/GA5_2.nxs"
+#background = "water/water_2.nxs"
+mask = fabio.open(args.mask)
+poni = pyFAI.load(args.poni)#"config_saxs_sdetx_1500_12keV.poni")
+file = h5py.File(args.sample,'r')
+#bkg = h5py.File(args.background,'r')
 
 
-transmission_bkg = bkg['scan']['data']['beamstop_2'][()]/bkg['scan']['data']['ic1'][()]
-print("Background transmission:"+str(transmission_bkg))
+#transmission_bkg = bkg['scan']['data']['beamstop_2'][()]/bkg['scan']['data']['ic1'][()]
+#print("Background transmission:"+str(transmission_bkg))
 
 transmission_sample = file['scan']['data']['beamstop_2'][()]/file['scan']['data']['ic1'][()]
 print("Sample transmission:"+str(transmission_sample))
 
-data_cor = file['scan']['data']['saxs_raw'][()][0]/transmission_sample - bkg['scan']['data']['saxs_raw'][()][0]/transmission_bkg
+temperature = str(round(file['scan']['data']['p62']['t95tempproglinkam']['eh.01']['temperature'][()],2))
 
-#data_cor = file['scan']['data']['saxs_raw'][()][0]
+#data_cor = file['scan']['data']['saxs_raw'][()][0]/transmission_sample - bkg['scan']['data']['saxs_raw'][()][0]/transmission_bkg
+
+data_cor = file['scan']['data']['saxs_raw'][()][0]
 #data_cor = bkg['scan']['data']['saxs_raw'][()][0]
 
-data_1D = poni.integrate1d(data_cor, 1000, filename=path+folder+sample+'_1D.dat', correctSolidAngle=True,
+data_1D = poni.integrate1d(data_cor, 1000, filename=args.sample+"_"+temperature+'_1D.dat', correctSolidAngle=True,
                                   method='csr', radial_range=(None), azimuth_range=(None),
                                   unit="q_A^-1", mask=mask.data, normalization_factor=1.0,
                                   metadata=None) 
@@ -67,5 +80,4 @@ ax[1].set_ylabel('intensity [a.u.]',fontsize=25)
 # ax[1].set_xticks([0.01,0.1,0.4,0.6])
 ax[1].get_xaxis().set_major_formatter(ticker.ScalarFormatter())
 ax[1].tick_params(labelsize=25)
-
-plt.show()
+plt.savefig(args.sample+"_"+temperature+".png", bbox_inches="tight", dpi=600)
