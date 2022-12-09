@@ -53,7 +53,7 @@ print("Sample temperature:"+temperature)
 
 data_1D = poni.integrate1d(file['scan']['data']['saxs_raw'][()][0]/transmission_sample,
                            1000, filename=args.sample+"_"+temperature+'_1D.dat', correctSolidAngle=True,
-                                  method='csr', radial_range=(None), azimuth_range=(None),
+                                  method='csr_ocl', radial_range=(None), azimuth_range=(None),
                                   unit="q_A^-1", mask=mask.data, normalization_factor=1.0,
                                   metadata=None,error_model="poisson") 
 
@@ -72,7 +72,7 @@ if args.background != None:
     
     bkg_1D = poni.integrate1d(bkg['scan']['data']['saxs_raw'][()][0]/transmission_bkg,
                               1000, filename=args.sample+"_"+temperature+'_bkg1D.dat', correctSolidAngle=True,
-                                  method='csr', radial_range=(None), azimuth_range=(None),
+                                  method='csr_ocl', radial_range=(None), azimuth_range=(None),
                                   unit="q_A^-1", mask=mask.data, normalization_factor=1.0,
                                   metadata=None,error_model="poisson")
     if args.autobkg == True:
@@ -91,7 +91,7 @@ if args.empty != None:
         transmission_empty = empty['scan']['data']['beamstop_2'][()]/empty['scan']['data']['ic1'][()]
     empty_1D = poni.integrate1d(empty['scan']['data']['saxs_raw'][()][0]/transmission_empty,
                               1000, filename=args.sample+"_"+temperature+'_empty1D.dat', correctSolidAngle=True,
-                                  method='csr', radial_range=(None), azimuth_range=(None),
+                                  method='csr_ocl', radial_range=(None), azimuth_range=(None),
                                   unit="q_A^-1", mask=mask.data, normalization_factor=1.0,
                                   metadata=None,error_model="poisson")
     if args.autobkg == True:
