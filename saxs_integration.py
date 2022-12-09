@@ -30,7 +30,7 @@ parser.add_argument("--background", help="background file (.nxs)")
 
 parser.add_argument("--bkg_factor", help="background correction factor",type=float,default=float(1))
 parser.add_argument("--noscaling", help="background file (.nxs)",action="store_true")
-
+parser.add_argument("--autobkg", help="Automatic background scaling",action="store_true")
 args = parser.parse_args()
 
 #path = "/home/u0092172/Documents/"
@@ -74,7 +74,12 @@ if args.background != None:
                               1000, filename=args.sample+"_"+temperature+'_bkg1D.dat', correctSolidAngle=True,
                                   method='csr', radial_range=(None), azimuth_range=(None),
                                   unit="q_A^-1", mask=mask.data, normalization_factor=1.0,
-                                  metadata=None,error_model="poisson") 
+                                  metadata=None,error_model="poisson")
+    if args.autobkg == True:
+        print("Use automated background scaling with caution!")
+        if max(bkg_1D[1][:np.where(bkg_1D[0]>0.02)[0][0]]) > max(data_1D[1][:np.where(data_1D[0]>0.02)[0][0]]):
+            bkg_1D = [bkg_1D[0],bkg_1D[1],bkg_1D[2]]
+            bkg_1D[1] -=  max(bkg_1D[1][:np.where(bkg_1D[0]>0.02)[0][0]]) - max(data_1D[1][:np.where(data_1D[0]>0.02)[0][0]])
 else:
     data_I = data_1D[1]
     data_sig = abs(data_1D[2])
@@ -89,6 +94,9 @@ if args.empty != None:
                                   method='csr', radial_range=(None), azimuth_range=(None),
                                   unit="q_A^-1", mask=mask.data, normalization_factor=1.0,
                                   metadata=None,error_model="poisson")
+    if args.autobkg == True:
+        if max(empty_1D[1][:np.where(empty_1D[0]>0.02)[0][0]]) > max(data_1D[1][:np.where(data_1D[0]>0.02)[0][0]]):
+            empty_1D[1] -= max(empty_1D[1][:np.where(empty_1D[0]>0.02)[0][0]]) - max(data_1D[1][:np.where(data_1D[0]>0.02)[0][0]])
     if args.background != None:
         data_I = (data_1D[1]-empty_1D[1])-(bkg_1D[1]-empty_1D[1])
         data_sig = abs(data_1D[2])+abs(empty_1D[2])+abs(bkg_1D[2])+abs(empty_1D[2])
@@ -127,5 +135,8 @@ ax.set_ylabel('intensity [a.u.]',fontsize=25)
 # ax.set_xticks([0.01,0.1,0.4,0.6])
 ax.get_xaxis().set_major_formatter(ticker.ScalarFormatter())
 ax.tick_params(labelsize=25)
-plt.show()
-#plt.savefig(args.sample+"_"+temperature+".png", bbox_inches="tight", dpi=600)
+#plt.show()
+plt.savefig(args.sample+"_"+temperature+".png", bbox_inches="tight", dpi=600)
+
+data_out = np.column_stack((data_1D[0],data_I,data_sig))
+np.savetxt(args.sample+"_subtracted.dat",data_out,delimiter='\t',fmt='%s')
