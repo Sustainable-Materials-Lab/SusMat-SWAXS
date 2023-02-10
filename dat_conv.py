@@ -116,4 +116,4 @@ elif args.kratky == True:
 else:
     head2 = ''
 
-np.savetxt(fname[:,-4]+ext,out,delimiter=' ',fmt='%.10f',header=head2,comments='',newline='\n')
+np.savetxt(fname[:-4]+ext,out,delimiter=' ',fmt='%.10f',header=head2,comments='',newline='\n')
