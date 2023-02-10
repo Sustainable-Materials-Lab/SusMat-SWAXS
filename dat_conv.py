@@ -54,10 +54,10 @@ if args.kratky == True:
     args.SAXS = True
 
 if args.pyfai == True:
-    data = np.genfromtxt(fname+".dat",comments='#',usecols=(0,1,2),encoding="utf-8")
+    data = np.genfromtxt(fname,comments='#',usecols=(0,1,2),encoding="utf-8")
 else:
-    head = get_line_number('.*q\\([AÅ].*',fname+".dat")
-    data = np.genfromtxt(fname+".dat",skip_header=head,usecols=(0,1,2),encoding="utf-8")
+    head = get_line_number('.*q\\([AÅ].*',fname)
+    data = np.genfromtxt(fname,skip_header=head,usecols=(0,1,2),encoding="utf-8")
 
 
 data = data[~np.isnan(data).any(axis=1)]
@@ -116,4 +116,4 @@ elif args.kratky == True:
 else:
     head2 = ''
 
-np.savetxt(fname+ext,out,delimiter=' ',fmt='%.10f',header=head2,comments='',newline='\n')
+np.savetxt(fname[:,-4]+ext,out,delimiter=' ',fmt='%.10f',header=head2,comments='',newline='\n')
