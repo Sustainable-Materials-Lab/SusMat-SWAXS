@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Absorption correction according to Xenocs notes for XSACT
+Absorption correction not implemented correctlyT
 """
 
 import pyFAI
@@ -11,9 +11,6 @@ from matplotlib.colors import LogNorm
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import matplotlib.ticker as ticker
 import argparse as ap
-
-
-
 
 
 
@@ -39,7 +36,7 @@ mask = fabio.open(args.mask)
 if args.noabs == False:
     def abscor (tth,intensity,trans):
         fabs = (np.log(trans)*((1/np.cos(np.radians(tth)))-1))/(np.exp(np.log(trans)*((1/np.cos(np.radians(tth)))-1))-1)
-        cor_int = intensity*fabs
+        cor_int = intensity/fabs
         return cor_int
 else:
     def abscor (tth,intensity,trans):
