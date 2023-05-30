@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Spyder Editor
-
-This is a temporary script file.
+Absorption correction according to Xenocs notes for XSACT
 """
 
 import pyFAI
@@ -13,6 +11,10 @@ from matplotlib.colors import LogNorm
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import matplotlib.ticker as ticker
 import argparse as ap
+
+
+
+
 
 
 parser = ap.ArgumentParser(description=
@@ -26,7 +28,7 @@ parser.add_argument("--empty", help="empty file (.edf)")
 parser.add_argument("--background", help="background file (.edf)")
 parser.add_argument("--opencl", help="Use OpenCL (requires pyopencl)",action="store_true")
 parser.add_argument("--bkg_factor", help="background correction factor",type=float,default=float(1))
-parser.add_argument("--noscaling", help="Do not scale for transmission",action="store_true")
+parser.add_argument("--noabs", help="No absorption correction",action="store_true")
 parser.add_argument("--autobkg", help="Automatic background scaling",action="store_true")
 args = parser.parse_args()
 
@@ -34,14 +36,24 @@ args = parser.parse_args()
 file = fabio.open(args.sample)
 mask = fabio.open(args.mask)
 
+if args.noabs == False:
+    def abscor (tth,intensity,trans):
+        fabs = (np.log(trans)*((1/np.cos(np.radians(tth)))-1))/(np.exp(np.log(trans)*((1/np.cos(np.radians(tth)))-1))-1)
+        cor_int = intensity*fabs
+        return cor_int
+else:
+    def abscor (tth,intensity,trans):
+        return intensity
 
 if args.opencl==True:
     intmeth='csr_ocl'
 else:
     intmeth='csr'
 
+
+
 geo = {               
-      "detector": "Eiger1M",
+      "detector": pyFAI.detectors.Detector(float(file.header['PSize_2']),float(file.header['PSize_1'])),
       "dist": float(file.header['SampleDistance']),
       "poni1": float(file.header['PSize_2'])*float(file.header['Center_2']),
       "poni2": float(file.header['PSize_1'])*float(file.header['Center_1']),
@@ -53,28 +65,30 @@ geo = {
 
 poni = pyFAI.azimuthalIntegrator.AzimuthalIntegrator(**geo)
 
-
-if args.noscaling == True:
+if args.noabs == True:
     transmission_sample = 1
 else:
     transmission_sample = float(file.header['Transmission'])
 print("Sample transmission:"+str(round(transmission_sample,4)))
 
-norm_sample = float(file.header['Intensity1'])
+#norm_sample = float(file.header['Intensity1'])
 norm_sample = 1
 
 
 data_1D = poni.integrate1d(file.data,
-                           1000, filename=args.sample[:-4]+'_1D.dat', correctSolidAngle=True,
+                           1000, correctSolidAngle=True,
                                   method=intmeth, radial_range=(None), azimuth_range=(None),
-                                  unit="q_A^-1", mask=mask.data, normalization_factor=norm_sample,
+                                  unit="2th_deg", mask=mask.data, normalization_factor=norm_sample,
                                   metadata=None,error_model="poisson") 
+
+data_1D = [data_1D[0],data_1D[1],data_1D[2]]
+data_1D[1] = abscor(data_1D[0],data_1D[1],transmission_sample)
 
 data_2D = file.data/transmission_sample
 
 if args.background != None:
     bkg = fabio.open(args.background)
-    if args.noscaling == True:
+    if args.noabs == True:
         transmission_bkg = 1
     elif np.allclose(float(bkg.header['Transmission']),1,atol=5e-3) == True:
         transmission_bkg = 1
@@ -83,13 +97,15 @@ if args.background != None:
 
     print("Background transmission:"+str(round(transmission_bkg,4)))
 
-    norm_bkg = float(bkg.header['Intensity1'])
+    #norm_bkg = float(bkg.header['Intensity1'])
     norm_bkg = 1
     bkg_1D = poni.integrate1d(bkg.data,
-                              1000, filename=args.sample[:-4]+'_bkg1D.dat', correctSolidAngle=True,
+                              1000, correctSolidAngle=True,
                                   method=intmeth, radial_range=(None), azimuth_range=(None),
-                                  unit="q_A^-1", mask=mask.data, normalization_factor=norm_bkg,
+                                  unit="2th_deg", mask=mask.data, normalization_factor=norm_bkg,
                                   metadata=None,error_model="poisson")
+    bkg_1D = [bkg_1D[0],bkg_1D[1],bkg[2]]
+    bkg_1D[1] = abscor(bkg_1D[0],bkg_1D[1],transmission_bkg)
     
     bkg_2D = bkg.data/transmission_bkg
     
@@ -101,9 +117,10 @@ if args.background != None:
 else:
     data_I = data_1D[1]
     data_sig = abs(data_1D[2])
+    bkg_2D = 0
 if args.empty != None:
     empty = fabio.open(args.empty)
-    if args.noscaling == True:
+    if args.noabs == True:
         transmission_empty = 1
     elif np.allclose(float(empty.header['Transmission']),1,atol=5e-3) == True:
         transmission_empty = 1
@@ -112,10 +129,12 @@ if args.empty != None:
     norm_empty = float(empty.header['Intensity1'])
     norm_empty = 1
     empty_1D = poni.integrate1d(empty.data,
-                              1000, filename=args.sample[:-4]+'_empty1D.dat', correctSolidAngle=True,
+                              1000, correctSolidAngle=True,
                                   method=intmeth, radial_range=(None), azimuth_range=(None),
-                                  unit="q_A^-1", mask=mask.data, normalization_factor=norm_empty,
+                                  unit="2th_deg", mask=mask.data, normalization_factor=norm_empty,
                                   metadata=None,error_model="poisson")
+    empty_1D = [empty_1D[0],empty_1D[1],empty_1D[2]]
+    empty_1D[1] = abscor(empty_1D[0],empty_1D[1],transmission_empty)
     
     empty_2D = empty.data/transmission_empty
     
@@ -140,7 +159,7 @@ else:
         data_2I = data_2D - bkg_2D
         data_sig = abs(data_1D[2])+abs(bkg_1D[2])
 
-data_2I2 = poni.integrate2d(data_2I,3000,3600,unit="q_A^-1")
+data_2I2 = poni.integrate2d(data_2I,3000,3600,unit="2th_deg")
 
 I2,q2,chi2 = data_2I2
 
@@ -153,7 +172,7 @@ I2max = np.max(I2)
 fig, axs = plt.subplot_mosaic([['(a)','(b)']],figsize=(7,4),constrained_layout=True)
 
 fig1 = axs['(a)'].imshow(I2,origin="lower",extent=[q2.min(),q2.max(),chi2.min(),chi2.max()],
-                         norm=LogNorm(vmin=I2min, vmax=I2max),cmap=plt.get_cmap('cividis'),aspect="auto")
+                         norm=LogNorm(vmin=I2min, vmax=I2max),cmap=plt.get_cmap('inferno'),aspect="auto")
 divider = make_axes_locatable(axs['(a)'])
 cax = divider.append_axes("top", size="5%", pad=0.05)
 
@@ -161,22 +180,22 @@ cbar = plt.colorbar(fig1, cax=cax,orientation="horizontal")
 cbar.ax.tick_params(labelsize=8)
 cax.xaxis.set_ticks_position("top")
 
-axs['(a)'].set_xlabel(r'q /$\AA^{-1}$',fontsize=8)
-axs['(a)'].set_ylabel(r'$\phi/^{\circ}$',fontsize=8)
+axs['(a)'].set_xlabel(r'$2\theta$ /$^{\circ}$',fontsize=8)
+axs['(a)'].set_ylabel(r'$\phi$ /$^{\circ}$',fontsize=8)
 axs['(a)'].tick_params(labelsize=8)
 
 fig2 = axs['(b)'].errorbar(data_1D[0],data_I,yerr=data_sig,linestyle='')
 
-axs['(b)'].set_xscale('log')
-axs['(b)'].set_yscale('log')
-axs['(b)'].set_xlabel(r'q /$\AA^{-1}$',fontsize=8)
-axs['(b)'].set_ylabel('I(q) /Arb.',fontsize=8)
+#axs['(b)'].set_xscale('log')
+#axs['(b)'].set_yscale('log')
+axs['(b)'].set_xlabel(r'$2\theta$ /$^{\circ}$',fontsize=8)
+axs['(b)'].set_ylabel('I /Arb.',fontsize=8)
 #axs['(b)'].get_xaxis().set_major_formatter(ticker.ScalarFormatter())
 #axs['(b)'].get_yaxis().set_major_formatter(ticker.ScalarFormatter())
 #axs['(b)'].ticklabel_format(style='sci', axis='both', scilimits=(0,0))
 axs['(b)'].yaxis.major.formatter._useMathText = True
 axs['(b)'].xaxis.major.formatter._useMathText = True
-axs['(b)'].set_xticks([0.01,0.1,1])
+#axs['(b)'].set_xticks([0.01,0.1,1])
 #axs['(b)'].get_xaxis().set_major_formatter(ticker.ScalarFormatter())
 axs['(b)'].tick_params(labelsize=8)
 #plt.show()
