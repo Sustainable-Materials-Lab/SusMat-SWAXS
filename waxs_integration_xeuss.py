@@ -99,7 +99,7 @@ if args.background != None:
                                   method=intmeth, radial_range=(None), azimuth_range=(None),
                                   unit="2th_deg", mask=mask.data, normalization_factor=norm_bkg,
                                   metadata=None,error_model="poisson")
-    bkg_1D = [bkg_1D[0],bkg_1D[1],bkg[2]]
+    bkg_1D = [bkg_1D[0],bkg_1D[1],bkg_1D[2]]
     bkg_1D[1] = abscor(bkg_1D[0],bkg_1D[1],transmission_bkg)
     
     bkg_2D = bkg.data/transmission_bkg
@@ -157,7 +157,7 @@ data_2I2 = poni.integrate2d(data_2I,3000,3600,unit="2th_deg")
 I2,q2,chi2 = data_2I2
 
 if np.min(I2) < 0:
-    I2min = 1e-3
+    I2min = 1e-1
 else:
     I2min = np.min(I2)
 I2max = np.max(I2)
