@@ -35,7 +35,7 @@ mask = fabio.open(args.mask)
 
 
 if args.opencl==True:
-    intmeth='csr_ocl'
+    intmeth='opencl'
 else:
     intmeth='csr'
 
