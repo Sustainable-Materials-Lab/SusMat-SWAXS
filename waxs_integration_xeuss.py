@@ -33,6 +33,8 @@ args = parser.parse_args()
 file = fabio.open(args.sample)
 mask = fabio.open(args.mask)
 
+args.noabs = True
+
 if args.noabs == False:
     def abscor (tth,intensity,trans):
         fabs = (np.log(trans)*((1/np.cos(np.radians(tth)))-1))/(np.exp(np.log(trans)*((1/np.cos(np.radians(tth)))-1))-1)
@@ -62,10 +64,7 @@ geo = {
 
 poni = pyFAI.azimuthalIntegrator.AzimuthalIntegrator(**geo)
 
-if args.noabs == True:
-    transmission_sample = 1
-else:
-    transmission_sample = float(file.header['Transmission'])
+transmission_sample = float(file.header['Transmission'])
 print("Sample transmission:"+str(round(transmission_sample,4)))
 
 #norm_sample = float(file.header['Intensity1'])
@@ -85,9 +84,7 @@ data_2D = file.data/transmission_sample
 
 if args.background != None:
     bkg = fabio.open(args.background)
-    if args.noabs == True:
-        transmission_bkg = 1
-    elif np.allclose(float(bkg.header['Transmission']),1,atol=5e-3) == True:
+    if np.allclose(float(bkg.header['Transmission']),1,atol=5e-3) == True:
         transmission_bkg = 1
     else:
         transmission_bkg = float(bkg.header['Transmission'])
@@ -117,9 +114,7 @@ else:
     bkg_2D = 0
 if args.empty != None:
     empty = fabio.open(args.empty)
-    if args.noabs == True:
-        transmission_empty = 1
-    elif np.allclose(float(empty.header['Transmission']),1,atol=5e-3) == True:
+    if np.allclose(float(empty.header['Transmission']),1,atol=5e-3) == True:
         transmission_empty = 1
     else:
         transmission_empty = float(empty.header['Transmission'])
