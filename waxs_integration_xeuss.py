@@ -4,6 +4,7 @@ Absorption correction not implemented correctlyT
 """
 
 import pyFAI
+from pyFAI.azimuthalIntegrator import AzimuthalIntegrator
 import fabio
 import numpy as np
 import matplotlib.pyplot as plt
@@ -62,7 +63,7 @@ geo = {
       "wavelength": float(file.header['WaveLength'])
 }
 
-poni = pyFAI.azimuthalIntegrator.AzimuthalIntegrator(**geo)
+poni = AzimuthalIntegrator(**geo)
 
 transmission_sample = float(file.header['Transmission'])
 print("Sample transmission:"+str(round(transmission_sample,4)))

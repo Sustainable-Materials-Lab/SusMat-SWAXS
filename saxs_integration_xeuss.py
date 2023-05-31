@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Spyder Editor
 
-This is a temporary script file.
 """
 
 import pyFAI
+from pyFAI.azimuthalIntegrator import AzimuthalIntegrator
 import fabio
 import numpy as np
 import matplotlib.pyplot as plt
@@ -51,8 +50,9 @@ geo = {
       "wavelength": float(file.header['WaveLength'])
 }
 
-poni = pyFAI.azimuthalIntegrator.AzimuthalIntegrator(**geo)
+#poni = pyFAI.azimuthalIntegrator.AzimuthalIntegrator(**geo)
 
+poni = AzimuthalIntegrator(**geo)
 
 if args.noscaling == True:
     transmission_sample = 1
