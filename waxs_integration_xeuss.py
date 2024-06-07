@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Absorption correction not implemented correctlyT
+Absorption correction not implemented correctly
 """
 
 import pyFAI
@@ -64,8 +64,10 @@ geo = {
 }
 
 poni = AzimuthalIntegrator(**geo)
-
-transmission_sample = float(file.header['Transmission'])
+try:
+    transmission_sample = float(file.header['Transmission'])
+except KeyError:
+    transmission_sample = 1
 print("Sample transmission:"+str(round(transmission_sample,4)))
 
 #norm_sample = float(file.header['Intensity1'])
@@ -194,5 +196,5 @@ axs['(b)'].tick_params(labelsize=8)
 #plt.show()
 plt.savefig(args.sample[:-4]+".svg", bbox_inches="tight")
 
-data_out = np.column_stack((data_1D[0],data_I,data_sig))
-np.savetxt(args.sample[:-4]+"_subtracted.dat",data_out,delimiter='\t',fmt='%s')
+#data_out = np.column_stack((data_1D[0],data_I,data_sig))
+#np.savetxt(args.sample[:-4]+"_subtracted.dat",data_out,delimiter='\t',fmt='%s')
