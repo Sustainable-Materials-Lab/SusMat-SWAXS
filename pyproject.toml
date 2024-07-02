@@ -19,7 +19,6 @@ classifiers = [
 dependencies = [
     "pyfai",
     "pyopencl",
-    "intel-compute-runtime",
     "click"
 ]
 
