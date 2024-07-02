@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "SusMat-SWAXS"
+version = "1.0"
+authors = [
+  { name="Samuel Eyley", email="samuel.eyley@kuleuven.be" },
+]
+description = "A collection of python scripts for uploading analytical data to iRODS"
+readme = "README.md"
+requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "pyfai",
+    "pyopencl",
+    "click"
+]
+
+[project.urls]
+Homepage = "https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion"
+Issues = "https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/-/issues"
