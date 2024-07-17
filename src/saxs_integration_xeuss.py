@@ -1,18 +1,19 @@
 # -*- coding: utf-8 -*-
 """
-
+This script will integrate 2D SAXS data collected on the Xenocs
+Xeuss SWAXS instrument and subtract background data if necessary.
 """
 import argparse as ap
 import matplotlib.ticker as ticker
+import matplotlib.pyplot as plt
+from matplotlib.colors import LogNorm
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 import pyFAI
 from pyFAI.azimuthalIntegrator import AzimuthalIntegrator
 import fabio
 import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.colors import LogNorm
-from mpl_toolkits.axes_grid1 import make_axes_locatable
 
-UNITY = 1
+# pylint: disable=C0103
 
 parser = ap.ArgumentParser(
     description="Perform data reduction on data from Xeuss 2.0C")
@@ -61,7 +62,7 @@ else:
     poni = pyFAI.load(args.poni)
 
 if not args.transcor:
-    transmission_sample = UNITY
+    transmission_sample = 1
 else:
     transmission_sample = float(file.header['Transmission'])
 print("Sample transmission:"+str(round(transmission_sample, 4)))
@@ -87,9 +88,9 @@ data_2D = file.data/transmission_sample
 if args.background is not None:
     bkg = fabio.open(args.background)
     if not args.transcor:
-        transmission_bkg = UNITY
+        transmission_bkg = 1
     elif np.allclose(float(bkg.header['Transmission']), 1, atol=5e-3):
-        transmission_bkg = UNITY
+        transmission_bkg = 1
     else:
         transmission_bkg = float(bkg.header['Transmission'])
 
@@ -123,9 +124,9 @@ else:
 if args.empty is not None:
     empty = fabio.open(args.empty)
     if not args.transcor:
-        transmission_empty = UNITY
+        transmission_empty = 1
     elif np.allclose(float(empty.header['Transmission']), 1, atol=5e-3):
-        transmission_empty = UNITY
+        transmission_empty = 1
     else:
         transmission_empty = float(empty.header['Transmission'])
     norm_empty = (float(empty.header['Intensity1']) *
