@@ -19,7 +19,8 @@ classifiers = [
 dependencies = [
     "pyfai",
     "pyopencl",
-    "click"
+    "click",
+    "pyqt5"
 ]
 
 [project.urls]
