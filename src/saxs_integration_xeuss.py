@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 This script will integrate 2D SAXS data collected on the Xenocs
 Xeuss SWAXS instrument and subtract background data if necessary.
@@ -29,7 +28,9 @@ parser.add_argument(
 parser.add_argument(
     "--bkg_factor", help="background correction factor", type=float, default=float(1))
 parser.add_argument(
-    "--transcor", help="Transmission_correction", action="store_true")
+    "--lac", help="Convert to absolute units using the calculated thickness - LAC in cm^-1",type=float, default=float(0))
+parser.add_argument(
+    "--thickness", help="thickness in cm used for transmission correction (otherwise, transmitted intensity used)",type=float, default=float(1))
 parser.add_argument(
     "--autobkg", help="Automatic background scaling", action="store_true")
 args = parser.parse_args()
@@ -61,11 +62,10 @@ if not args.poni:
 else:
     poni = pyFAI.load(args.poni)
 
-if not args.transcor:
-    transmission_sample = 1
+if np.allclose(args.lac, 0):
+    transmission_sample = args.thickness
 else:
-    transmission_sample = float(file.header['Transmission'])
-print("Sample transmission:"+str(round(transmission_sample, 4)))
+    transmission_sample = -((1/args.lac)*np.log10(float(file.header['Transmission'])))
 
 norm_sample = (float(file.header['Intensity1']) *
                float(file.header['ExposureTime']) *
@@ -73,7 +73,7 @@ norm_sample = (float(file.header['Intensity1']) *
                    (
                        float(file.header['PSize_1']) /
                        float(file.header['SampleDistance']))
-                   )**2
+)**2
 )/1e-15
 
 
@@ -87,22 +87,20 @@ data_2D = file.data/transmission_sample
 
 if args.background is not None:
     bkg = fabio.open(args.background)
-    if not args.transcor:
-        transmission_bkg = 1
+    if np.allclose(args.lac, 0):
+        transmission_bkg = args.thickness
     elif np.allclose(float(bkg.header['Transmission']), 1, atol=5e-3):
-        transmission_bkg = 1
+        transmission_bkg = -((1/args.lac)*np.log10(1))
     else:
-        transmission_bkg = float(bkg.header['Transmission'])
-
-    print("Background transmission:"+str(round(transmission_bkg, 4)))
-
+        transmission_bkg = -((1/args.lac)*np.log10(float(bkg.header['Transmission'])))
+    
     norm_bkg = (float(bkg.header['Intensity1']) *
                 float(bkg.header['ExposureTime']) *
                 (
                     (
                         float(bkg.header['PSize_1']) /
                         float(bkg.header['SampleDistance']))
-                    )**2
+    )**2
     )/1e-15
     bkg_1D = poni.integrate1d(bkg.data,
                               1000, filename=args.sample[:-4]+'_bkg1D.dat', correctSolidAngle=True,
@@ -123,19 +121,19 @@ else:
     data_sig = abs(data_1D[2])
 if args.empty is not None:
     empty = fabio.open(args.empty)
-    if not args.transcor:
-        transmission_empty = 1
-    elif np.allclose(float(empty.header['Transmission']), 1, atol=5e-3):
-        transmission_empty = 1
+    if np.allclose(args.lac, 0):
+        transmission_empty = args.thickness
+    elif np.allclose(float(bkg.header['Transmission']), 1, atol=5e-3):
+        transmission_empty = -((1/args.lac)*np.log10(1))
     else:
-        transmission_empty = float(empty.header['Transmission'])
+        transmission_empty = -((1/args.lac)*np.log10(float(empty.header['Transmission'])))
     norm_empty = (float(empty.header['Intensity1']) *
-                float(empty.header['ExposureTime']) *
-                (
-                    (
-                        float(empty.header['PSize_1']) /
-                        float(empty.header['SampleDistance']))
-                    )**2
+                  float(empty.header['ExposureTime']) *
+                  (
+        (
+            float(empty.header['PSize_1']) /
+            float(empty.header['SampleDistance']))
+    )**2
     )/1e-15
     empty_1D = poni.integrate1d(empty.data,
                                 1000, filename=args.sample[:-4]+'_empty1D.dat', correctSolidAngle=True,
@@ -217,3 +215,5 @@ plt.savefig(args.sample[:-4]+".svg", bbox_inches="tight")
 data_out = np.column_stack((data_1D[0], data_I, data_sig))
 np.savetxt(args.sample[:-4]+"_subtracted.dat",
            data_out, delimiter='\t', fmt='%s')
+
+# %%
