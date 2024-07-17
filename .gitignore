@@ -1,3 +1,4 @@
 .conda/
 *.egg-info/
 build/
+test/
