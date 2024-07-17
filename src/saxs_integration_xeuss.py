@@ -201,7 +201,12 @@ fig2 = axs['(b)'].errorbar(data_1D[0], data_I, yerr=data_sig, linestyle='')
 axs['(b)'].set_xscale('log')
 axs['(b)'].set_yscale('log')
 axs['(b)'].set_xlabel(r'q /$\AA^{-1}$', fontsize=8)
-axs['(b)'].set_ylabel('I(q) /Arb.', fontsize=8)
+if np.allclose(args.lac,0):
+    if np.allclose(args.thickness,1):
+        axs['(b)'].set_ylabel('I(q) /Arb.', fontsize=8)
+
+else:
+    axs['(b)'].set_ylabel(r'I(q) /cm$^{-1}$.', fontsize=8)
 axs['(b)'].get_xaxis().set_major_formatter(ticker.ScalarFormatter())
 axs['(b)'].get_yaxis().set_major_formatter(ticker.ScalarFormatter())
 axs['(b)'].ticklabel_format(style='sci', axis='both',
