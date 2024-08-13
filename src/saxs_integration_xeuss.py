@@ -46,7 +46,7 @@ else:
     intmeth = 'csr'
 if not args.poni:
     geo = {
-        "detector": pyFAI.detector_factory("Eiger1M"),
+        "detector": pyFAI.detectors.Detector(float(file.header['PSize_2']),float(file.header['PSize_1'])),
         "dist": float(file.header['SampleDistance']),
         "poni1": float(file.header['PSize_2'])*float(file.header['Center_2']),
         "poni2": float(file.header['PSize_1'])*float(file.header['Center_1']),
@@ -208,10 +208,10 @@ if np.allclose(args.lac,0):
 else:
     axs['(b)'].set_ylabel(r'I(q) /cm$^{-1}$.', fontsize=8)
 axs['(b)'].get_xaxis().set_major_formatter(ticker.ScalarFormatter())
-axs['(b)'].get_yaxis().set_major_formatter(ticker.ScalarFormatter())
-axs['(b)'].ticklabel_format(style='sci', axis='both',
-                            scilimits=(0, 0), useMathText=True)
-axs['(b)'].set_xticks([0.01, 0.1, 1])
+# axs['(b)'].get_yaxis().set_major_formatter(ticker.ScalarFormatter())
+# axs['(b)'].ticklabel_format(style='sci', axis='both',
+#                             scilimits=(0, 0), useMathText=True)
+#axs['(b)'].set_xticks([0.01, 0.1, 1])
 # axs['(b)'].get_xaxis().set_major_formatter(ticker.ScalarFormatter())
 axs['(b)'].tick_params(labelsize=8)
 # plt.show()
