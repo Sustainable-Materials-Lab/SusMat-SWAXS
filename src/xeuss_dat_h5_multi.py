@@ -22,6 +22,8 @@ def process_edf_file(file_path, hdf):
         lines = [line.replace('##', ' ') for line in lines]
         meta = {s.split("   ")[0].replace("# ", "").strip(): s.split(
             "   ")[-1].strip() for s in lines if '#' in s}
+        meta = {key.replace("#",""): value.replace("#","") for key,value in meta.items()}
+        meta = {key: value for key, value in meta.items() if key}
         head = get_line_number('.*q\\([AÅ].*',file_path)
         meta["columns"] = lines[head-1].split()
         data = np.genfromtxt(file_path,skip_header=head,usecols=(0,1,2),encoding="utf-8")
