@@ -12,7 +12,10 @@ infile = fabio.open(file_path)
 output_path = file_path.with_suffix(".tif")
 json_output = file_path.with_suffix(".json")
 
-image = Image.fromarray(infile.data)
+try:
+    image = Image.fromarray(infile.data,mode='F')
+except ValueError:
+    image = Image.fromarray(infile.data)
 
 image.save(output_path,format='TIFF',compression='tiff_deflate')
 
