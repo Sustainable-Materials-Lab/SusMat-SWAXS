@@ -1,4 +1,4 @@
-"""This script converts Xeuss edf files to HDF5 format for archival storage"""
+"""This script converts XSACT or Foxtrot dat files to HDF5 format for archival storage"""
 import sys
 import re
 from pathlib import Path
@@ -35,7 +35,7 @@ def process_dat_file(file_path: str, hdf):
     for attr_name, attr_value in meta.items():
         dset.attrs[attr_name] = attr_value
 
-def add_edfs_to_hdf5(directory: str, hdf5_filename: str):
+def add_dats_to_hdf5(directory: str, hdf5_filename: str):
     """find all dat files in the current folder and subfolders, then 
     add them to a single hdf5 file"""
     files = list(Path(directory).glob('**/*.dat'))
@@ -45,4 +45,4 @@ def add_edfs_to_hdf5(directory: str, hdf5_filename: str):
     hdf.close()
 
 if __name__ == '__main__':
-    add_edfs_to_hdf5(sys.argv[1],sys.argv[2])
+    add_dats_to_hdf5(sys.argv[1],sys.argv[2])
