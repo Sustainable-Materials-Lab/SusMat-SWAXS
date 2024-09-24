@@ -1,7 +1,7 @@
-# SWAXS 1D tools
+# SWAXS tools
 
 ## Description
-This is a collection of  scripts to perform data manipulation on 1D data.
+This is a collection of scripts to perform data conversion on X-ray scattering data.
 
 dat_conv - Converts Xenocs format 1D data (.dat) to TOPAS compatible .xye
 sph_harm - Plot the spherical harmonics function using coefficients from TOPAS input file
