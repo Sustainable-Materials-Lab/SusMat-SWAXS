@@ -7,20 +7,20 @@ import h5py
 
 
 
-def process_edf_file(file_path, hdf):
-    # Read the TIFF file
+def process_edf_file(file_path: Path, hdf):
+    """Create hdf5 dataset from edf file"""
     infile = fabio.open(file_path)
-    
-    # Get the dataset name from the file name
     dataset_name = file_path.stem
     
-    # Open the HDF5 file and add the image data as a dataset
     dset = hdf.create_dataset(
         dataset_name, data=infile.data, compression='gzip')
+    
     for attr_name, attr_value in infile.header.items():
         dset.attrs[attr_name] = attr_value
 
-def add_edfs_to_hdf5(directory, hdf5_filename):
+def add_edfs_to_hdf5(directory: str, hdf5_filename: str):
+    """Find all edf files in all subdirectories of the specified
+    path and add them to the hdf5"""
     files = list(Path(directory).glob('**/*.edf'))
     hdf = h5py.File(hdf5_filename,'w')
     with ThreadPoolExecutor() as executor:
