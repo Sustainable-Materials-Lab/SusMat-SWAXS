@@ -6,21 +6,16 @@ This is a collection of  scripts to perform data manipulation on 1D data.
 dat_conv - Converts Xenocs format 1D data (.dat) to TOPAS compatible .xye
 sph_harm - Plot the spherical harmonics function using coefficients from TOPAS input file
 saxs_integration - Integrate SAXS data from different sources
+sph_harm - calculate the visual representation of a spherical harmonics function in real space.
+topas_init - Automate creation of topas input files
+xeuss_ - scripts designed for data conversion for files from Xenocs Xeuss instrumentation
 
 ## Installation
-Requires python3 and numpy. Works "out of the box" with anaconda python 3 distribution.
+Install in a virtual environment to avoid clashes.
 
-For saxs_integration, pyFAI is required.  This can be installed on Miniconda or Anaconda using the conda-forge repository. It is suggested to do this in a new environment:
-
-```powershell
-conda config --add channels conda-forge
-conda config --set channel_priority strict
-conda create -n saxs pyFAI pyopencl intel-compute-runtime
-```
-
-If you wish to use the graphical tools from pyFAI, you will need to run on linux.
 
 ## Usage
+All scripts are designed to be run from the command line with arguments. Command line interface is not always annotated.
 
 ### dat_conv
 
@@ -65,4 +60,4 @@ Contact Sam (@u0092172) if you are interested in contributing.
 Originally authored by Sam Eyley (@u0092172)
 
 ## License
-CC-BY-SA 4.0
+MIT License

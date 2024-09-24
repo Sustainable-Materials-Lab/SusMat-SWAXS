@@ -20,7 +20,8 @@ dependencies = [
     "pyfai",
     "pyopencl",
     "click",
-    "pyqt5"
+    "pyqt5",
+    "h5py"
 ]
 
 [project.urls]
