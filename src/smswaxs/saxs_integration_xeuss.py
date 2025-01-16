@@ -12,7 +12,7 @@ from pyFAI.azimuthalIntegrator import AzimuthalIntegrator
 import fabio
 import numpy as np
 
-# pylint: disable=C0103
+# pylint: disable=C0103, unused-variable
 def cli():
     """Integrate 2D saxs data"""
     parser = ap.ArgumentParser(
