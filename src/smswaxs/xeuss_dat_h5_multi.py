@@ -11,7 +11,7 @@ def get_line_number(phrase: str, file_name: str):
     with open(file_name, encoding="utf-8") as f:
         for i, line in enumerate(f, 1):
             p = re.compile(phrase)
-            if p.match(line) != None:
+            if p.match(line) is not None:
                 return i
 
 def process_dat_file(file_path: str, hdf):
