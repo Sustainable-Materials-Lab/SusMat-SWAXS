@@ -30,5 +30,5 @@ Issues = "https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/-/i
 
 [project.scripts]
 sm-datconv = "smswaxs.dat_conv:cli"
-sm-edfh5 = "smswaxs.xeuss_edf_h5-multi:add_edfs_to_hdf5"
+sm-edfh5 = "smswaxs.xeuss_edf_h5_multi:add_edfs_to_hdf5"
 sm-saxsint = "smswaxs.saxs_integration_xeuss:cli"
