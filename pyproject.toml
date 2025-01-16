@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "SusMat-SWAXS"
-version = "1.0"
+version = "0.1.0"
 authors = [
   { name="Samuel Eyley", email="samuel.eyley@kuleuven.be" },
 ]
@@ -27,3 +27,6 @@ dependencies = [
 [project.urls]
 Homepage = "https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion"
 Issues = "https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/-/issues"
+
+[project.scripts]
+sm-datconv = "smswaxs.dat_conv:cli"
