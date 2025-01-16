@@ -5,8 +5,22 @@ Created on Thu May  7 11:44:10 2015
 @author: u0092172
 """
 import argparse as ap
-import numpy as np
 import re
+import numpy as np
+
+def get_line_number(phrase, file_name):
+    """Get the line number containing phrase"""
+    with open(file_name, encoding="utf-8") as f:
+        for i, line in enumerate(f, 1):
+            p = re.compile(phrase)
+            if p.match(line) is not None:
+                return i
+
+def get_number_lines(file_name):
+    """Get the number of lines in a file"""
+    with open(file_name, encoding="utf-8") as f:
+        lines = len(f.readlines())
+        return lines
 
 
 def cli():
@@ -35,34 +49,21 @@ def cli():
     args = parser.parse_args()  # map arguments to args
 
     fname = args.input
-    if args.highscore == True:
+    if args.highscore is True:
         ext = ".asc"
-    elif args.fullprof == True:
+    elif args.fullprof is True:
         ext = "_FP.dat"
-    elif args.kratky == True:
+    elif args.kratky is True:
         ext = "_kratky.dat"
     else:
         ext = ".xye"
 
     # Import the data
 
-    def get_line_number(phrase, file_name):
-        with open(file_name, encoding="utf-8") as f:
-            for i, line in enumerate(f, 1):
-                p = re.compile(phrase)
-                if p.match(line) != None:
-                    return i
-
-    def get_number_lines(file_name):
-        with open(file_name, encoding="utf-8") as f:
-            for i, line in enumerate(f, 1):
-                pass
-            return i
-
-    if args.kratky == True:
+    if args.kratky is True:
         args.SAXS = True
 
-    if args.pyfai == True:
+    if args.pyfai is True:
         data = np.genfromtxt(fname, comments='#',
                              usecols=(0, 1, 2), encoding="utf-8")
     else:
@@ -76,27 +77,27 @@ def cli():
     i = data[:, 1]
     e = data[:, 2]
 
-    if args.pyfai == True:
+    if args.pyfai is True:
         ttheta = q
-        if args.clip == True:
+        if args.clip is True:
             start = np.where(ttheta > 5)[0][0]
             ttheta = ttheta[start:]
             i = i[start:]
             e = e[start:]
-    elif args.SAXS == False:
+    elif args.SAXS is False:
         # Calc 2theta
 
         ttheta = 2*np.degrees(np.arcsin((q*args.wavelength)/(4*np.pi)))
 
         # Clip the data to start at 5 degrees to remove excessive intensity
-        if args.clip == True:
+        if args.clip is True:
             start = np.where(ttheta > 5)[0][0]
             ttheta = ttheta[start:]
             i = i[start:]
             e = e[start:]
 
         # Convert i to counts
-    if args.renormalize == True:
+    if args.renormalize is True:
         i = i*args.exposure*1e11
     else:
         i = i*args.exposure
@@ -104,15 +105,15 @@ def cli():
     if min(i) < 0:
         i -= min(i)
 
-    if args.zero == True:
+    if args.zero is True:
         i -= min(i)
 
-    if args.highscore == True:
+    if args.highscore is True:
         out = np.column_stack((ttheta.flatten(), i.flatten()))
     else:
-        if args.SAXS == False:
+        if args.SAXS is False:
             out = np.column_stack((ttheta.flatten(), i.flatten(), e.flatten()))
-        elif args.kratky == False:
+        elif args.kratky is False:
             out = np.column_stack((q.flatten(), i.flatten(), e.flatten()))
         else:
             q2i = (q**2)*i
@@ -120,9 +121,9 @@ def cli():
             out = np.column_stack(
                 (q.flatten(), i.flatten(), q2i.flatten(), e.flatten(), q2sig.flatten()))
 
-    if args.fullprof == True:
+    if args.fullprof is True:
         head2 = 'XYDATA' + '\n' + 'INTER 0 0 2' + 4*'\n'
-    elif args.kratky == True:
+    elif args.kratky is True:
         head2 = "q I(q) q2I(q) sig(q) q2sig(q)"
     else:
         head2 = ''
