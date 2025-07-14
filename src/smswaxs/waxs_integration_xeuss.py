@@ -4,7 +4,7 @@ Absorption correction not implemented correctly
 """
 
 import pyFAI
-from pyFAI.azimuthalIntegrator import AzimuthalIntegrator
+from pyFAI.integrator.azimuthal import AzimuthalIntegrator
 import fabio
 import numpy as np
 import matplotlib.pyplot as plt

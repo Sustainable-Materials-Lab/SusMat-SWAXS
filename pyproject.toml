@@ -17,7 +17,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-    "pyfai",
+    "pyfai>2024.10.0",
     "pyopencl",
     "click",
     "pyqt5",
