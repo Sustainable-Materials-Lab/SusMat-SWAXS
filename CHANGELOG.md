@@ -1,3 +1,10 @@
+## [0.1.4](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v0.1.3...v0.1.4) (2025-09-03)
+
+
+### Bug Fixes
+
+* determine h5 filename from input folder or edf filename ([a282ae3](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/a282ae39a721de62ab2dd44811f246b4dbfd299e))
+
 ## [0.1.3](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v0.1.2...v0.1.3) (2025-07-14)
 
 
