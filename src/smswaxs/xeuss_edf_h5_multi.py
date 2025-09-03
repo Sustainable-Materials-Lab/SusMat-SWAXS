@@ -23,9 +23,13 @@ def add_edfs_to_hdf5():
     path and add them to the hdf5"""
     parser = ap.ArgumentParser(description="Convert Xeuss edf files to HDF5 format")
     parser.add_argument("directory", help="Directory containing edf files")
-    parser.add_argument("hdf5_filename", help="Name of the HDF5 file to create")
     args = parser.parse_args()
-    files = list(Path(args.directory).glob('**/*.edf'))
+    if ".edf" in args.directory:
+        files = [Path(args.directory)]
+        args.hdf5_filename = files[0].with_suffix('.h5').name
+    else:
+        files = list(Path(args.directory).glob('**/*.edf'))
+        args.hdf5_filename = Path(args.directory).name + '.h5'
     hdf = h5py.File(args.hdf5_filename,'w')
     with ThreadPoolExecutor() as executor:
         executor.map(lambda file: process_edf_file(file, hdf), files)
