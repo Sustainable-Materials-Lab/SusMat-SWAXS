@@ -1,3 +1,10 @@
+## [0.2.2](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v0.2.1...v0.2.2) (2025-10-28)
+
+
+### Bug Fixes
+
+* **WAXS:** fix incorrect conversion of q to 2 theta ([c2c2f2d](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/c2c2f2da7c4c12c666b052bb5add1834fe542e75))
+
 ## [0.2.1](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v0.2.0...v0.2.1) (2025-10-28)
 
 
