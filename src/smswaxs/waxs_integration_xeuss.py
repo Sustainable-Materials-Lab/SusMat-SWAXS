@@ -109,7 +109,10 @@ def cli():
                             metadata=None, error_model="poisson")
 
     data_1D_corr = [data_1D[0], data_1D[1], data_1D[2]]
-    data_1D_corr[1] = abscor(data_1D[0],data_1D[1],transmission_sample)
+    if args.unit.lower() == "2th":
+        data_1D_corr[1] = abscor(data_1D[0],data_1D[1],transmission_sample)
+    else:
+        data_1D_corr[1] = abscor(np.degrees(np.arcsin((float(file.header['WaveLength'])*data_1D[0])/(4*np.pi))),data_1D[1],transmission_sample)
     data_2D = file.data/transmission_sample
 
     if args.background is not None:
@@ -134,7 +137,10 @@ def cli():
                                 metadata=None, error_model="poisson")
 
         bkg_1D_corr = [bkg_1D[0], bkg_1D[1], bkg_1D[2]]
-        bkg_1D_corr[1] = abscor(bkg_1D[0],bkg_1D[1],transmission_bkg)
+        if args.unit.lower() == "2th":
+            bkg_1D_corr[1] = abscor(bkg_1D[0],bkg_1D[1],transmission_bkg)
+        else:
+            bkg_1D_corr[1] = abscor(np.degrees(np.arcsin((float(bkg.header['WaveLength'])*bkg_1D[0])/(4*np.pi))),bkg_1D[1],transmission_bkg)
         bkg_2D = bkg.data/transmission_bkg * args.bkg_factor
         data_I = (data_1D_corr[1]-bkg_1D_corr[1])
         data_2I = data_2D - bkg_2D
