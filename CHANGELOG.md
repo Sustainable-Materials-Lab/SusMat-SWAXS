@@ -1,3 +1,10 @@
+# [0.2.0](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v0.1.4...v0.2.0) (2025-10-28)
+
+
+### Features
+
+* **WAXS:** checked and re-created the WAXS integration script to give TOPAS compatible output ([55c56ac](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/55c56ac199361c801af2008e2d9e163f5ddca8e7))
+
 ## [0.1.4](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v0.1.3...v0.1.4) (2025-09-03)
 
 
