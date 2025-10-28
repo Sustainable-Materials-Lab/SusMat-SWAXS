@@ -1,3 +1,10 @@
+## [0.2.1](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v0.2.0...v0.2.1) (2025-10-28)
+
+
+### Bug Fixes
+
+* **WAXS:** fix calculation of absorption coefficient when q instead of 2 theta ([b39173c](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/b39173c2ecfbf232f2bec3e052575dc1c9522373))
+
 # [0.2.0](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v0.1.4...v0.2.0) (2025-10-28)
 
 
