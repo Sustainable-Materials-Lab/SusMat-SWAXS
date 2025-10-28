@@ -87,7 +87,7 @@ def cli():
         if np.allclose(args.lac, 0):
             args.noabs = True
         else:
-            if np.allclose(args.thickness, 0):
+            if np.allclose(args.thickness, 0) is False:
                 transmission_sample = np.exp(-args.lac*args.thickness)
             else:
                 args.noabs = True
@@ -112,7 +112,7 @@ def cli():
     if args.unit.lower() == "2th":
         data_1D_corr[1] = abscor(data_1D[0],data_1D[1],transmission_sample)
     else:
-        data_1D_corr[1] = abscor(np.degrees(np.arcsin((float(file.header['WaveLength'])*data_1D[0])/(4*np.pi))),data_1D[1],transmission_sample)
+        data_1D_corr[1] = abscor(2*np.degrees(np.arcsin(((float(file.header['WaveLength'])/1e-10)*data_1D[0])/(4*np.pi))),data_1D[1],transmission_sample)
     data_2D = file.data/transmission_sample
 
     if args.background is not None:
@@ -140,7 +140,7 @@ def cli():
         if args.unit.lower() == "2th":
             bkg_1D_corr[1] = abscor(bkg_1D[0],bkg_1D[1],transmission_bkg)
         else:
-            bkg_1D_corr[1] = abscor(np.degrees(np.arcsin((float(bkg.header['WaveLength'])*bkg_1D[0])/(4*np.pi))),bkg_1D[1],transmission_bkg)
+            bkg_1D_corr[1] = abscor(2*np.degrees(np.arcsin(((float(file.header['WaveLength'])/1e-10)*bkg_1D[0])/(4*np.pi))),bkg_1D[1],transmission_bkg)
         bkg_2D = bkg.data/transmission_bkg * args.bkg_factor
         data_I = (data_1D_corr[1]-bkg_1D_corr[1])
         data_2I = data_2D - bkg_2D
