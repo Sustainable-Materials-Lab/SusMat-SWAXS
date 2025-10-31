@@ -1,3 +1,10 @@
+# [1.1.0](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v1.0.0...v1.1.0) (2025-10-31)
+
+
+### Features
+
+* **sphharm:** spherical harmonics function was added as a project script. ([4408d1f](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/4408d1f4c07cbc88c5d5fa70a751d4eeb598641b))
+
 # [1.0.0](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v0.2.2...v1.0.0) (2025-10-31)
 
 
