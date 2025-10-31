@@ -21,7 +21,14 @@ dependencies = [
     "pyopencl",
     "click",
     "pyqt5",
-    "h5py"
+    "h5py",
+    "matplotlib",
+    "numpy",
+    "scipy",
+    "sympy",
+    "fabio",
+    "hdf5plugin",
+    "pillow"
 ]
 
 [project.urls]
@@ -33,3 +40,4 @@ sm-datconv = "smswaxs.dat_conv:cli"
 sm-edfh5 = "smswaxs.xeuss_edf_h5_multi:add_edfs_to_hdf5"
 sm-saxsint = "smswaxs.saxs_integration_xeuss:cli"
 sm-waxsint = "smswaxs.waxs_integration_xeuss:cli"
+sm-spharm = "smswaxs.sph_harm:cli"

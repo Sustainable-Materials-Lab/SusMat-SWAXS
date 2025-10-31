@@ -17,6 +17,7 @@ from .dat_conv import cli as dat_conv_cli
 from .xeuss_edf_h5_multi import add_edfs_to_hdf5
 from .saxs_integration_xeuss import cli as saxs_integration_cli
 from .waxs_integration_xeuss import cli as waxs_integration_cli
+from .sph_harm import cli as sph_harm_cli
 
 # Make CLI functions available at package level
 __all__ = [
@@ -26,5 +27,6 @@ __all__ = [
     "dat_conv_cli",
     "add_edfs_to_hdf5", 
     "saxs_integration_cli",
-    "waxs_integration_cli"
+    "waxs_integration_cli",
+    "sph_harm_cli"
 ]
