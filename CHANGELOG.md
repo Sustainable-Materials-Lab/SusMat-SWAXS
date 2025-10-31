@@ -1,3 +1,15 @@
+# [1.0.0](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v0.2.2...v1.0.0) (2025-10-31)
+
+
+### Features
+
+* add __init__.py with package metadata and CLI function imports ([096cd8c](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/096cd8c0c6ca738c84983d6dbcc5eaf784ad7069))
+
+
+### BREAKING CHANGES
+
+* no longer namespace package
+
 ## [0.2.2](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v0.2.1...v0.2.2) (2025-10-28)
 
 
