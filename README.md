@@ -51,7 +51,7 @@ Convert multiple EDF files to a single HDF5 file with metadata preservation.
 
 **Usage:**
 ```bash
-sm-edfh5
+sm-edfh5 <path to directory containing edf files>
 ```
 
 This tool provides an interactive interface for selecting and converting EDF files.
