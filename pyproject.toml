@@ -1,6 +1,6 @@
 [build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
+requires = ["uv_build>=0.9.6,<0.10.0"]
+build-backend = "uv_build"
 
 [project]
 name = "SusMat-SWAXS"
@@ -41,3 +41,7 @@ sm-edfh5 = "smswaxs.xeuss_edf_h5_multi:add_edfs_to_hdf5"
 sm-saxsint = "smswaxs.saxs_integration_xeuss:cli"
 sm-waxsint = "smswaxs.waxs_integration_xeuss:cli"
 sm-spharm = "smswaxs.sph_harm:cli"
+
+
+[tool.uv.build-backend]
+module-name = "smswaxs"

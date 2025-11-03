@@ -140,6 +140,7 @@ def cli(coefficients, output, resolution):
     z = R*np.cos(theta)
 
     # Create 3D plot
+    # pylint: disable=E1101
     _, ax = plt.subplots(subplot_kw=dict(projection='3d'), figsize=(14, 10))
     norm = colors.Normalize()
     ax.plot_surface(x, y, z, rstride=1, cstride=1, facecolors=cm.jet(norm(R)))
