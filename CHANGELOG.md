@@ -1,3 +1,15 @@
+# [2.0.0](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v1.1.0...v2.0.0) (2025-11-03)
+
+
+### Features
+
+* **core:** switch to UV build system ([3bace1d](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/3bace1d1bd7025fd1771353e26e645739991eb2f))
+
+
+### BREAKING CHANGES
+
+* **core:** change build system
+
 # [1.1.0](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v1.0.0...v1.1.0) (2025-10-31)
 
 
