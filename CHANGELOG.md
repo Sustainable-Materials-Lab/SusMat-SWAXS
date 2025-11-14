@@ -1,3 +1,10 @@
+## [2.0.1](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.0.0...v2.0.1) (2025-11-14)
+
+
+### Bug Fixes
+
+* update dependencies to use pyside6 instead of pyqt5 ([0c59eed](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/0c59eed2838284bfd7fde763b1a7aaf6679a8004))
+
 # [2.0.0](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v1.1.0...v2.0.0) (2025-11-03)
 
 
