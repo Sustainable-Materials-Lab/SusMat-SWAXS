@@ -20,7 +20,7 @@ dependencies = [
     "pyfai>2024.10.0",
     "pyopencl",
     "click",
-    "pyqt5",
+    "pyside6",
     "h5py",
     "matplotlib",
     "numpy",
