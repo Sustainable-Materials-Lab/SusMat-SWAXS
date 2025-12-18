@@ -1,3 +1,10 @@
+## [2.0.4](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.0.3...v2.0.4) (2025-12-18)
+
+
+### Bug Fixes
+
+* use line plot instead of errorbar plot for WAXS as errors are usually too small for relevancy ([0fc16d6](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/0fc16d66e15822cc0c35351814313efbfea7dd4a))
+
 ## [2.0.3](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.0.2...v2.0.3) (2025-12-18)
 
 
