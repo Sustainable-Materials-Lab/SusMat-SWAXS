@@ -1,3 +1,10 @@
+## [2.0.2](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.0.1...v2.0.2) (2025-12-18)
+
+
+### Bug Fixes
+
+* switch to png output due to bitmapped 2D data on left-hand plot ([17c7f3c](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/17c7f3cd912ced917c1095f1f2ac8f0652d78961))
+
 ## [2.0.1](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.0.0...v2.0.1) (2025-11-14)
 
 
