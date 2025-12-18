@@ -205,7 +205,7 @@ def cli():
 
     axs['(a)'].tick_params(labelsize=8)
 
-    fig2 = axs['(b)'].errorbar(data_1D[0], data_I, yerr=data_sig, linestyle='')
+    fig2 = axs['(b)'].plot(data_1D[0], data_I, linewidth=0.5)
 
     # axs['(b)'].set_xscale('log')
     # axs['(b)'].set_yscale('log')
