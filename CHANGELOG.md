@@ -1,3 +1,10 @@
+## [2.0.3](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.0.2...v2.0.3) (2025-12-18)
+
+
+### Bug Fixes
+
+* implement xmin and xmax correctly ([4d096dc](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/4d096dcafb57786db8f91e126eccae798da59a47))
+
 ## [2.0.2](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.0.1...v2.0.2) (2025-12-18)
 
 
