@@ -217,7 +217,7 @@ def cli():
     # axs['(b)'].get_xaxis().set_major_formatter(ticker.ScalarFormatter())
     axs['(b)'].tick_params(labelsize=8)
     # plt.show()
-    plt.savefig(args.sample[:-4]+".svg", bbox_inches="tight")
+    plt.savefig(args.sample[:-4]+".png", bbox_inches="tight",dpi=600)
 
     data_out = np.column_stack((data_1D[0], data_I, data_sig))
     if args.unit.lower() == "q":
