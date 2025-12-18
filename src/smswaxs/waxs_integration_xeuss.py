@@ -36,9 +36,9 @@ def cli():
         "--thickness", help="thickness /cm used for trans. cor. (otherwise, trans. int. used)",
         type=float, default=float(0))
     parser.add_argument(
-        "--xmin", help="Minimum value of radial unit (q)", type=float, default=float(0.36))
+        "--xmin", help="Minimum value of radial unit (q)", type=float)
     parser.add_argument(
-        "--xmax", help="Max value of radial unit (q)", type=float, default=float(3.8))
+        "--xmax", help="Max value of radial unit (q)", type=float, default=3.8)
     parser.add_argument(
         "--raw2D", help="Display the 2D image in the lab frame", action="store_true")
     parser.add_argument(
@@ -49,10 +49,15 @@ def cli():
 
     if args.unit.lower() == "q":
         UNIT = "q_A^-1"
+
     elif args.unit.lower() == "2th":
         UNIT = "2th_deg"
     else:
         raise ValueError("Unit must be 'q' or '2th'")
+    if args.xmin:
+        radran = (args.xmin, args.xmax)
+    else:
+        radran = (None)
     file = fabio.open(args.sample)
     mask = fabio.open(args.mask)
     if args.noabs is False:
@@ -114,7 +119,7 @@ def cli():
 
     data_1D = poni.integrate1d(file.data,
                                1000, filename=args.sample[:-4]+'_1D.dat', correctSolidAngle=True,
-                               method=intmeth, radial_range=(None), azimuth_range=(None),
+                               method=intmeth, radial_range=radran, azimuth_range=(None),
                                unit=UNIT, mask=mask.data, normalization_factor=norm_sample,
                                metadata=None, error_model="poisson")
 
@@ -144,7 +149,7 @@ def cli():
         bkg_1D = poni.integrate1d(bkg.data,
                                   1000, filename=args.sample[:-4]+'_bkg1D.dat',
                                   correctSolidAngle=True, method=intmeth,
-                                  radial_range=(None), azimuth_range=(None),
+                                  radial_range=radran, azimuth_range=(None),
                                   unit=UNIT, mask=mask.data, normalization_factor=norm_bkg,
                                   metadata=None, error_model="poisson")
 
