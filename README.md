@@ -54,8 +54,6 @@ Convert multiple EDF files to a single HDF5 file with metadata preservation.
 sm-edfh5 <path to directory containing edf files>
 ```
 
-This tool provides an interactive interface for selecting and converting EDF files.
-
 ### sm-saxsint
 Integrate 2D SAXS data from Xenocs Xeuss instruments with background subtraction and absorption correction.
 
