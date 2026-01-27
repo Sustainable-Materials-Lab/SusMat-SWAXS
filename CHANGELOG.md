@@ -1,3 +1,10 @@
+# [2.1.0](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.0.4...v2.1.0) (2026-01-27)
+
+
+### Features
+
+* script to convert xrdml data to xy for use in TOPAS ([ba22db8](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/ba22db81b3e993408d008c824271fa2a5ea438ca))
+
 ## [2.0.4](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.0.3...v2.0.4) (2025-12-18)
 
 
