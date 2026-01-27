@@ -25,7 +25,7 @@ def get_number_lines(file_name):
 
 def cli():
     """Convert dat files to xye format for use in TOPAS"""
-    parser = ap.ArgumentParser(description='Sort out stupid Xenocs edf files')
+    parser = ap.ArgumentParser(description='Convert dat files to xye format for use in TOPAS')
     parser.add_argument("input", help="Filename of the .dat (excl. ext.)")
     parser.add_argument(
         "--wavelength", help="Wavelength in Angstroms", default=float(1.54189))

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu May  7 11:44:10 2015
-
+Convert xrdml files to xy format for use in TOPAS. Extract metadata, but drop units from pint quantities.
 @author: u0092172
 """
 from pathlib import Path

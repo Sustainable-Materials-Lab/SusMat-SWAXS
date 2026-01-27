@@ -46,6 +46,18 @@ sm-datconv <filename_without_extension>
 Get-ChildItem -Filter *.dat | ForEach-Object -Process {sm-datconv $_.BaseName}
 ```
 
+### sm-xrdmlconv
+Converts Malvern PANalytical format 1D data (.xrdml) to TOPAS compatible .xy format.
+
+**Input:** `.xrdml` file .
+
+**Usage:**
+```bash
+sm-xrdmlconv <filename_without_extension>
+```
+
+**Output:** `.xy` file with tab-separated columns for 2θ and I and a `.json` file containing metadata.
+
 ### sm-edfh5
 Convert multiple EDF files to a single HDF5 file with metadata preservation.
 
