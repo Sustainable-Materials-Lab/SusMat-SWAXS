@@ -136,6 +136,44 @@ wheels = [
 ]
 
 [[package]]
+name = "fairmat-readers-xrd"
+version = "0.0.8"
+source = { registry = "https://gitlab.kuleuven.be/api/v4/groups/14647/-/packages/pypi/simple" }
+dependencies = [
+    { name = "numpy" },
+    { name = "pint" },
+    { name = "xmltodict" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/f6/9f/6c8ecbac08b98821fd5e7c71fed480d19ac2769107f4d23211d4c22b9637/fairmat_readers_xrd-0.0.8.tar.gz", hash = "sha256:cd4f996e6eca6677b91f2864cc1c5a2704025721d72bd92475e990898a07f105", size = 6900676, upload-time = "2026-01-05T11:53:41.27Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/2f/85/690b40bf3fc342db5d55cee799405b5baad4047c48f34d4e0d0500de2419/fairmat_readers_xrd-0.0.8-py3-none-any.whl", hash = "sha256:19d8d7333cf248846515a005dd687e0cbd33b6d604c42cd7ca6cf365d39b6aa8", size = 28721, upload-time = "2026-01-05T11:53:40.089Z" },
+]
+
+[[package]]
+name = "flexcache"
+version = "0.3"
+source = { registry = "https://gitlab.kuleuven.be/api/v4/groups/14647/-/packages/pypi/simple" }
+dependencies = [
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/55/b0/8a21e330561c65653d010ef112bf38f60890051d244ede197ddaa08e50c1/flexcache-0.3.tar.gz", hash = "sha256:18743bd5a0621bfe2cf8d519e4c3bfdf57a269c15d1ced3fb4b64e0ff4600656", size = 15816, upload-time = "2024-03-09T03:21:07.555Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/27/cd/c883e1a7c447479d6e13985565080e3fea88ab5a107c21684c813dba1875/flexcache-0.3-py3-none-any.whl", hash = "sha256:d43c9fea82336af6e0115e308d9d33a185390b8346a017564611f1466dcd2e32", size = 13263, upload-time = "2024-03-09T03:21:05.635Z" },
+]
+
+[[package]]
+name = "flexparser"
+version = "0.4"
+source = { registry = "https://gitlab.kuleuven.be/api/v4/groups/14647/-/packages/pypi/simple" }
+dependencies = [
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/82/99/b4de7e39e8eaf8207ba1a8fa2241dd98b2ba72ae6e16960d8351736d8702/flexparser-0.4.tar.gz", hash = "sha256:266d98905595be2ccc5da964fe0a2c3526fbbffdc45b65b3146d75db992ef6b2", size = 31799, upload-time = "2024-11-07T02:00:56.249Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/fe/5e/3be305568fe5f34448807976dc82fc151d76c3e0e03958f34770286278c1/flexparser-0.4-py3-none-any.whl", hash = "sha256:3738b456192dcb3e15620f324c447721023c0293f6af9955b481e91d00179846", size = 27625, upload-time = "2024-11-07T02:00:54.523Z" },
+]
+
+[[package]]
 name = "fonttools"
 version = "4.60.1"
 source = { registry = "https://gitlab.kuleuven.be/api/v4/groups/14647/-/packages/pypi/simple" }
@@ -635,6 +673,21 @@ wheels = [
 ]
 
 [[package]]
+name = "pint"
+version = "0.25.2"
+source = { registry = "https://gitlab.kuleuven.be/api/v4/groups/14647/-/packages/pypi/simple" }
+dependencies = [
+    { name = "flexcache" },
+    { name = "flexparser" },
+    { name = "platformdirs" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/5f/74/bc3f671997158aef171194c3c4041e549946f4784b8690baa0626a0a164b/pint-0.25.2.tar.gz", hash = "sha256:85a45d1da8fe9c9f7477fed8aef59ad2b939af3d6611507e1a9cbdacdcd3450a", size = 254467, upload-time = "2025-11-06T22:08:09.184Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ab/88/550d41e81e6d43335603a960cd9c75c1d88f9cf01bc9d4ee8e86290aba7d/pint-0.25.2-py3-none-any.whl", hash = "sha256:ca35ab1d8eeeb6f7d9942b3cb5f34ca42b61cdd5fb3eae79531553dcca04dda7", size = 306762, upload-time = "2025-11-06T22:08:07.745Z" },
+]
+
+[[package]]
 name = "platformdirs"
 version = "4.5.0"
 source = { registry = "https://gitlab.kuleuven.be/api/v4/groups/14647/-/packages/pypi/simple" }
@@ -931,11 +984,12 @@ wheels = [
 
 [[package]]
 name = "susmat-swaxs"
-version = "2.0.2"
+version = "2.0.4"
 source = { editable = "." }
 dependencies = [
     { name = "click" },
     { name = "fabio" },
+    { name = "fairmat-readers-xrd" },
     { name = "h5py" },
     { name = "hdf5plugin" },
     { name = "matplotlib" },
@@ -952,6 +1006,7 @@ dependencies = [
 requires-dist = [
     { name = "click" },
     { name = "fabio" },
+    { name = "fairmat-readers-xrd", specifier = ">=0.0.8" },
     { name = "h5py" },
     { name = "hdf5plugin" },
     { name = "matplotlib" },
@@ -983,4 +1038,13 @@ source = { registry = "https://gitlab.kuleuven.be/api/v4/groups/14647/-/packages
 sdist = { url = "https://files.pythonhosted.org/packages/72/94/1a15dd82efb362ac84269196e94cf00f187f7ed21c242792a923cdb1c61f/typing_extensions-4.15.0.tar.gz", hash = "sha256:0cea48d173cc12fa28ecabc3b837ea3cf6f38c6d1136f85cbaaf598984861466", size = 109391, upload-time = "2025-08-25T13:49:26.313Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/18/67/36e9267722cc04a6b9f15c7f3441c2363321a3ea07da7ae0c0707beb2a9c/typing_extensions-4.15.0-py3-none-any.whl", hash = "sha256:f0fa19c6845758ab08074a0cfa8b7aecb71c999ca73d62883bc25cc018c4e548", size = 44614, upload-time = "2025-08-25T13:49:24.86Z" },
+]
+
+[[package]]
+name = "xmltodict"
+version = "0.13.0"
+source = { registry = "https://gitlab.kuleuven.be/api/v4/groups/14647/-/packages/pypi/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/39/0d/40df5be1e684bbaecdb9d1e0e40d5d482465de6b00cbb92b84ee5d243c7f/xmltodict-0.13.0.tar.gz", hash = "sha256:341595a488e3e01a85a9d8911d8912fd922ede5fecc4dce437eb4b6c8d037e56", size = 33813, upload-time = "2022-05-08T07:00:04.916Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/94/db/fd0326e331726f07ff7f40675cd86aa804bfd2e5016c727fa761c934990e/xmltodict-0.13.0-py2.py3-none-any.whl", hash = "sha256:aa89e8fd76320154a40d19a0df04a4695fb9dc5ba977cbb68ab3e4eb225e7852", size = 9971, upload-time = "2022-05-08T07:00:02.898Z" },
 ]

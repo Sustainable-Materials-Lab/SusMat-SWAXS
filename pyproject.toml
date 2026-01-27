@@ -28,7 +28,8 @@ dependencies = [
     "sympy",
     "fabio",
     "hdf5plugin",
-    "pillow"
+    "pillow",
+    "fairmat-readers-xrd>=0.0.8",
 ]
 
 [project.urls]
@@ -37,6 +38,7 @@ Issues = "https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/-/i
 
 [project.scripts]
 sm-datconv = "smswaxs.dat_conv:cli"
+sm-xrdmlconv = "smswaxs.xrdml_conv:cli"
 sm-edfh5 = "smswaxs.xeuss_edf_h5_multi:add_edfs_to_hdf5"
 sm-saxsint = "smswaxs.saxs_integration_xeuss:cli"
 sm-waxsint = "smswaxs.waxs_integration_xeuss:cli"
