@@ -1,3 +1,10 @@
+## [2.1.1](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.1.0...v2.1.1) (2026-01-30)
+
+
+### Bug Fixes
+
+* prevent error when sample transmission missing from file header ([0181505](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/01815050146c13aeead8a176f643a5850b7c2807))
+
 # [2.1.0](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.0.4...v2.1.0) (2026-01-27)
 
 

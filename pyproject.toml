@@ -4,7 +4,7 @@ build-backend = "uv_build"
 
 [project]
 name = "SusMat-SWAXS"
-version = "2.1.0"
+version = "2.1.1"
 authors = [
   { name="Samuel Eyley", email="samuel.eyley@kuleuven.be" },
 ]
