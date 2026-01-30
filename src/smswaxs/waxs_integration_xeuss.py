@@ -102,12 +102,13 @@ def cli():
     except KeyError:
         if np.allclose(args.lac, 0):
             args.noabs = True
+            transmission_sample = 1
         else:
             if np.allclose(args.thickness, 0) is False:
                 transmission_sample = np.exp(-args.lac*args.thickness)
             else:
                 args.noabs = True
-
+                transmission_sample = 1
     norm_sample = (float(file.header['Intensity1']) *
                    float(file.header['ExposureTime']) *
                    (
