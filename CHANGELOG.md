@@ -1,3 +1,10 @@
+## [2.1.2](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.1.1...v2.1.2) (2026-02-13)
+
+
+### Bug Fixes
+
+* make topas_init into a package script ([8e4d048](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/8e4d0484b2c7fbabdab6bbeb0a21f70e7e73d66b))
+
 ## [2.1.1](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.1.0...v2.1.1) (2026-01-30)
 
 
