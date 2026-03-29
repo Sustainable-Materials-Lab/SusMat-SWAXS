@@ -1,3 +1,10 @@
+## [2.1.3](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.1.2...v2.1.3) (2026-03-29)
+
+
+### Bug Fixes
+
+* add pypi release via Github ([66b6ae2](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/66b6ae225ca544a58338430247b845d83d3820ec))
+
 ## [2.1.2](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.1.1...v2.1.2) (2026-02-13)
 
 
