@@ -17,14 +17,6 @@ Install in a virtual environment to avoid dependency conflicts:
 pip install SusMat-SWAXS
 ```
 
-Or install from source:
-
-```bash
-git clone https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion.git
-cd swaxs-1d-data-conversion
-pip install -e .
-```
-
 
 ## Usage
 All scripts are available as command-line tools after installation. Use the `--help` flag with any command to see detailed usage information.
@@ -139,32 +131,14 @@ sm-spharm 1 -0.54889 0.48504 0.74711 0.79916 -0.33178 0.16323 0.45369 \
 
 **Output:** 3D visualization plot showing the spherical harmonics function in real space
 
-### Programmatic Usage
-
-The CLI functions can also be imported and used in Python scripts:
-
-```python
-import smswaxs
-
-# Access CLI functions programmatically
-smswaxs.dat_conv_cli()
-smswaxs.add_edfs_to_hdf5()
-smswaxs.saxs_integration_cli()
-smswaxs.waxs_integration_cli()
-smswaxs.sph_harm_cli()
-
-# Check package version
-print(smswaxs.__version__)
-```
-
 ## Support
-Contact Sam (@u0092172)
+Submit an issue on github: https://github.com/Sustainable-Materials-Lab/SusMat-SWAXS
 
 ## Contributing
-Contact Sam (@u0092172) if you are interested in contributing.
+Contact Samuel Eyley if you are interested in contributing.
 
 ## Authors and acknowledgment
-Originally authored by Sam Eyley (@u0092172). 
+Originally authored by Samuel Eyley. 
 
 Significant portions of code were developed with the help of Github Copilot (2025).
 

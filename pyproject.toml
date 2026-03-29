@@ -6,7 +6,7 @@ build-backend = "uv_build"
 name = "SusMat-SWAXS"
 version = "2.1.2"
 authors = [
-  { name="Samuel Eyley", email="samuel.eyley@kuleuven.be" },
+  { name="Samuel Eyley", email="susmat-swaxspypi.xepsj@simplelogin.com" },
 ]
 description = "A collection of python scripts for uploading analytical data to iRODS"
 readme = "README.md"
@@ -33,8 +33,8 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion"
-Issues = "https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/-/issues"
+Homepage = "https://github.com/Sustainable-Materials-Lab/SusMat-SWAXS"
+Issues = "https://github.com/Sustainable-Materials-Lab/SusMat-SWAXS/issues"
 
 [project.scripts]
 sm-datconv = "smswaxs.dat_conv:cli"
