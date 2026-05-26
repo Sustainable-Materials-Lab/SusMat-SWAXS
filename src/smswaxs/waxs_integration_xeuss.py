@@ -134,10 +134,21 @@ def cli():
 
     if args.background is not None:
         bkg = fabio.open(args.background)
-        if np.allclose(float(bkg.header['Transmission']), 1, atol=5e-3):
-            transmission_bkg = 1
-        else:
-            transmission_bkg = float(bkg.header['Transmission'])
+        try:
+            if np.allclose(float(bkg.header['Transmission']), 1, atol=5e-3):
+                transmission_bkg = 1
+            else:
+                transmission_bkg = float(bkg.header['Transmission'])
+        except KeyError:
+            if np.allclose(args.lac, 0):
+                args.noabs = True
+                transmission_bkg = 1
+            else:
+                if np.allclose(args.thickness, 0) is False:
+                    transmission_bkg = np.exp(-args.lac*args.thickness)
+                else:
+                    args.noabs = True
+                    transmission_bkg = 1
 
         norm_bkg = (float(bkg.header['Intensity1']) *
                     float(bkg.header['ExposureTime']) *
