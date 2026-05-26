@@ -1,3 +1,10 @@
+## [2.1.5](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.1.4...v2.1.5) (2026-05-26)
+
+
+### Bug Fixes
+
+* update dependencies to satisfy trivy ([062ca1e](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/062ca1ebe13f29aaba1c804c7097aaa92a9d1a43))
+
 ## [2.1.4](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.1.3...v2.1.4) (2026-05-26)
 
 
