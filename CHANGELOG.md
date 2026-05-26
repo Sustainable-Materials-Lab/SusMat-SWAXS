@@ -1,3 +1,10 @@
+## [2.1.4](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.1.3...v2.1.4) (2026-05-26)
+
+
+### Bug Fixes
+
+* **waxs:** allow background with no transmission defined in header ([6fbb41d](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/6fbb41dd23a6ca718ca179721b80a3af14703686))
+
 ## [2.1.3](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.1.2...v2.1.3) (2026-03-29)
 
 
