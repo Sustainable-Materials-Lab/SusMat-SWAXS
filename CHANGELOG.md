@@ -1,3 +1,10 @@
+## [2.1.7](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.1.6...v2.1.7) (2026-10-22)
+
+
+### Bug Fixes
+
+* upgrade uv.lock to avoid vulns ([5120cf6](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/5120cf6141d249cf3e72a723fdcd0c3036fee4bf))
+
 ## [2.1.6](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.1.5...v2.1.6) (2026-10-22)
 
 
