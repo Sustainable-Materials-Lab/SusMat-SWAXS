@@ -1,3 +1,10 @@
+## [2.1.6](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.1.5...v2.1.6) (2026-10-22)
+
+
+### Bug Fixes
+
+* remove unnecessary deps ([3413080](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/3413080c53d0d134567586746697ac5c49ee3720))
+
 ## [2.1.5](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.1.4...v2.1.5) (2026-05-26)
 
 
