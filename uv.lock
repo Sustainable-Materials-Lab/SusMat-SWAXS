@@ -984,19 +984,16 @@ wheels = [
 
 [[package]]
 name = "susmat-swaxs"
-version = "2.1.4"
+version = "2.1.5"
 source = { editable = "." }
 dependencies = [
     { name = "click" },
     { name = "fabio" },
     { name = "fairmat-readers-xrd" },
-    { name = "fonttools" },
     { name = "h5py" },
     { name = "hdf5plugin" },
-    { name = "lxml" },
     { name = "matplotlib" },
     { name = "numpy" },
-    { name = "pillow" },
     { name = "pyfai" },
     { name = "pyopencl" },
     { name = "pyside6" },
@@ -1009,13 +1006,10 @@ requires-dist = [
     { name = "click" },
     { name = "fabio" },
     { name = "fairmat-readers-xrd", specifier = ">=0.0.8" },
-    { name = "fonttools", specifier = ">=4.60.2" },
     { name = "h5py" },
     { name = "hdf5plugin" },
-    { name = "lxml", specifier = ">=6.1.0" },
     { name = "matplotlib" },
     { name = "numpy" },
-    { name = "pillow", specifier = ">=12.2.0" },
     { name = "pyfai", specifier = ">2024.10.0" },
     { name = "pyopencl" },
     { name = "pyside6" },
