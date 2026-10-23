@@ -29,6 +29,7 @@ dependencies = [
     "sympy",
     "fabio",
     "fairmat-readers-xrd>=0.0.8",
+    "hdf5plugin>=7.1.0",
 ]
 
 [project.urls]

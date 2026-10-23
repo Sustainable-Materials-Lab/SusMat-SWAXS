@@ -6,6 +6,7 @@ This is a temporary script file.
 """
 
 import h5py
+import hdf5plugin #needed for bitshuffle compression - is automatically registered with h5py
 import pyFAI
 import fabio
 import numpy as np

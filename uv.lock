@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.12, <3.15"
 
 [[package]]
@@ -1087,13 +1087,14 @@ wheels = [
 
 [[package]]
 name = "susmat-swaxs"
-version = "2.1.8"
+version = "2.1.10"
 source = { editable = "." }
 dependencies = [
     { name = "click" },
     { name = "fabio" },
     { name = "fairmat-readers-xrd" },
     { name = "h5py" },
+    { name = "hdf5plugin" },
     { name = "matplotlib" },
     { name = "numpy" },
     { name = "pyfai" },
@@ -1109,6 +1110,7 @@ requires-dist = [
     { name = "fabio" },
     { name = "fairmat-readers-xrd", specifier = ">=0.0.8" },
     { name = "h5py" },
+    { name = "hdf5plugin", specifier = ">=7.1.0" },
     { name = "matplotlib" },
     { name = "numpy" },
     { name = "pyfai", specifier = ">2024.10.0" },
