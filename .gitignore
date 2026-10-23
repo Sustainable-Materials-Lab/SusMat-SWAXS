@@ -4,3 +4,4 @@ build/
 test/
 .venv/
 __pycache__
+.cache/

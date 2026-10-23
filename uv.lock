@@ -1329,7 +1329,7 @@ wheels = [
 
 [[package]]
 name = "susmat-swaxs"
-version = "2.1.5"
+version = "2.1.7"
 source = { editable = "." }
 dependencies = [
     { name = "click" },

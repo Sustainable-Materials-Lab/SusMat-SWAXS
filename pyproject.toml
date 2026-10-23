@@ -10,7 +10,7 @@ authors = [
 ]
 description = "A collection of python scripts for uploading analytical data to iRODS"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.12,<3.15"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
