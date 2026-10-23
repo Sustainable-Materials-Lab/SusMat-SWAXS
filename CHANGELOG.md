@@ -1,3 +1,10 @@
+## [2.1.8](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.1.7...v2.1.8) (2026-10-23)
+
+
+### Bug Fixes
+
+* block python 3.15 due to h5py compatibility, see [#4](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/issues/4). ([2352496](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/23524965e0d6a3e6e5e1707f0a95481a03e6606d))
+
 ## [2.1.7](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.1.6...v2.1.7) (2026-10-22)
 
 
