@@ -1,18 +1,18 @@
 # included templates
 include:
   # Python template
-  - component: "$CI_SERVER_FQDN/to-be-continuous/python/gitlab-ci-python@7.12.1"
+  - component: "$CI_SERVER_FQDN/to-be-continuous/python/gitlab-ci-python@9.6.2"
     # rules:
     #   - if: $CI_COMMIT_TAG
     inputs:
-      image: docker.io/library/python:3.13
+      image: docker.io/library/python:3.14
       package-enabled: true
       publish-enabled: true
       trivy-disabled: false
       sbom-disabled: true
       build-system: "uv"
   # semantic-release template
-  - component: "$CI_SERVER_FQDN/to-be-continuous/semantic-release/gitlab-ci-semrel@3.14.4"
+  - component: "$CI_SERVER_FQDN/to-be-continuous/semantic-release/gitlab-ci-semrel@4.3.0"
     inputs:
       changelog-enabled: true
       auto-release-enabled: true
