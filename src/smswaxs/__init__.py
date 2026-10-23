@@ -8,7 +8,7 @@ This package provides tools for:
 - Data visualization and analysis
 """
 
-__version__ = "2.1.8"
+__version__ = "2.1.9"
 __author__ = "Samuel Eyley"
 __email__ = "samuel.eyley@kuleuven.be"
 

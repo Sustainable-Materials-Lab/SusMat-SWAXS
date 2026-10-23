@@ -1,3 +1,10 @@
+## [2.1.9](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.1.8...v2.1.9) (2026-10-23)
+
+
+### Bug Fixes
+
+* remove unused hdf5plugin dependency ([2db16ea](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/2db16ead3cc9e56f1d69c7f9bb8899ffae0e0937))
+
 ## [2.1.8](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.1.7...v2.1.8) (2026-10-23)
 
 
