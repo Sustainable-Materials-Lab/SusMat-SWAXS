@@ -1,3 +1,10 @@
+## [2.1.11](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.1.10...v2.1.11) (2026-10-23)
+
+
+### Bug Fixes
+
+* add hdf5plugin for bitshuffle compatibility with synchrotron data ([c1da80b](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/c1da80bd9af097fe9702b45c309b891a61fd5bbd))
+
 ## [2.1.10](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.1.9...v2.1.10) (2026-10-23)
 
 
