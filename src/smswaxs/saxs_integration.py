@@ -6,7 +6,6 @@ This is a temporary script file.
 """
 
 import h5py
-import hdf5plugin
 import pyFAI
 import fabio
 import numpy as np

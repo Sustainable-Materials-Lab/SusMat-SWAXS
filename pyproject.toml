@@ -27,7 +27,6 @@ dependencies = [
     "scipy",
     "sympy",
     "fabio",
-    "hdf5plugin",
     "fairmat-readers-xrd>=0.0.8",
 ]
 
