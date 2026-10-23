@@ -1,3 +1,10 @@
+## [2.1.10](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.1.9...v2.1.10) (2026-10-23)
+
+
+### Bug Fixes
+
+* update build backend to currently supported version ([381da04](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/381da04f987b39285e821f37640c212788d3bae9))
+
 ## [2.1.9](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.1.8...v2.1.9) (2026-10-23)
 
 
