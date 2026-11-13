@@ -1,3 +1,10 @@
+# [2.2.0](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.1.11...v2.2.0) (2026-11-13)
+
+
+### Features
+
+* add q_nm output ([5bc8b87](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/5bc8b87db5113764844335ffef28286389fa42bd))
+
 ## [2.1.11](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.1.10...v2.1.11) (2026-10-23)
 
 
