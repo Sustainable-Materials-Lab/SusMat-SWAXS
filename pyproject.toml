@@ -19,15 +19,12 @@ license = "MIT"
 license-files = ["LICENSE"]
 dependencies = [
     "pyfai>2024.10.0",
-    "pyopencl",
     "click",
-    "pyside6",
     "h5py",
     "matplotlib",
     "numpy",
     "scipy",
     "sympy",
-    "fabio",
     "fairmat-readers-xrd>=0.0.8",
     "hdf5plugin>=7.1.0",
 ]
