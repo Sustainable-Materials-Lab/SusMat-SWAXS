@@ -129,6 +129,9 @@ def cli():
     data_1D_corr = [data_1D[0], data_1D[1], data_1D[2]]
     if args.unit.lower() == "2th":
         data_1D_corr[1] = abscor(data_1D[0], data_1D[1], transmission_sample)
+    elif args.unit.lower() == "q_nm":
+        data_1D_corr[1] = abscor(2*np.degrees(np.arcsin(((float(file.header['WaveLength'])/1e-9)
+                                 * data_1D[0])/(4*np.pi))), data_1D[1], transmission_sample)
     else:
         data_1D_corr[1] = abscor(2*np.degrees(np.arcsin(((float(file.header['WaveLength'])/1e-10)
                                  * data_1D[0])/(4*np.pi))), data_1D[1], transmission_sample)
@@ -170,6 +173,9 @@ def cli():
         bkg_1D_corr = [bkg_1D[0], bkg_1D[1], bkg_1D[2]]
         if args.unit.lower() == "2th":
             bkg_1D_corr[1] = abscor(bkg_1D[0], bkg_1D[1], transmission_bkg)
+        elif args.unit.lower() == "q_nm":
+            bkg_1D_corr[1] = abscor(2*np.degrees(np.arcsin(((float(file.header['WaveLength'])/1e-9)*bkg_1D[0])/
+                                       (4*np.pi))), bkg_1D[1], transmission_bkg)
         else:
             bkg_1D_corr[1] = abscor(
                 2*np.degrees(np.arcsin(((float(file.header['WaveLength'])/1e-10)*bkg_1D[0])/
