@@ -1,3 +1,10 @@
+## [2.2.1](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.2.0...v2.2.1) (2026-11-13)
+
+
+### Bug Fixes
+
+* **waxs:** update absorption correction when using q in nm ([b637c31](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/b637c310a4733c56e684c663e6d389f3aec71f7d))
+
 # [2.2.0](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.1.11...v2.2.0) (2026-11-13)
 
 
