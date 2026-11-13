@@ -52,8 +52,10 @@ def cli():
 
     elif args.unit.lower() == "2th":
         UNIT = "2th_deg"
+    elif args.unit.lower() == "q_nm":
+        UNIT = "q_nm^-1"    
     else:
-        raise ValueError("Unit must be 'q' or '2th'")
+        raise ValueError("Unit must be 'q', 'q_nm' or '2th'")
     if args.xmin:
         radran = (args.xmin, args.xmax)
     else:
