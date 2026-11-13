@@ -208,6 +208,8 @@ def cli():
                                  aspect="auto")
         if args.unit.lower() == "q":
             axs['(a)'].set_xlabel(r'q /$\AA^{-1}$', fontsize=8)
+        elif args.unit.lower() == "q_nm":
+            axs['(a)'].set_xlabel(r'q /$nm^{-1}$', fontsize=8)
         else:
             axs['(a)'].set_xlabel(r'2$\theta$ /$^{\circ}$', fontsize=8)
         axs['(a)'].set_ylabel(r'$\phi/^{\circ}$', fontsize=8)
@@ -231,6 +233,8 @@ def cli():
     # axs['(b)'].set_yscale('log')
     if args.unit.lower() == "q":
         axs['(b)'].set_xlabel(r'q /$\AA^{-1}$', fontsize=8)
+    elif args.unit.lower() == "q_nm":
+        axs['(b)'].set_xlabel(r'q /$nm^{-1}$', fontsize=8)
     else:
         axs['(b)'].set_xlabel(r'2$\theta$ /$^{\circ}$', fontsize=8)
     axs['(b)'].set_ylabel('I(q) /Arb.', fontsize=8)
@@ -252,6 +256,10 @@ def cli():
     elif args.unit.lower() == "2th":
         np.savetxt(args.sample[:-4]+".xye",
                    data_out, delimiter='\t', fmt='%s')
+    elif args.unit.lower() == "q_nm":
+        header_str = "q(nm^-1)\tI(Arb.)\tSigma(Arb.)"
+        np.savetxt(args.sample[:-4]+"_subtracted.dat",
+                   data_out, delimiter='\t', fmt='%s', header=header_str)
 
 
 if __name__ == "__main__":
