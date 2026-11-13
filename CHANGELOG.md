@@ -1,3 +1,10 @@
+## [2.2.2](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.2.1...v2.2.2) (2026-11-13)
+
+
+### Bug Fixes
+
+* **waxs:** output labels when using q in nm^-1 ([94287fc](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/commit/94287fc85d883b7eac31872530ba0c0896b89127))
+
 ## [2.2.1](https://gitlab.kuleuven.be/susmat/general/swaxs-1d-data-conversion/compare/v2.2.0...v2.2.1) (2026-11-13)
 
 
